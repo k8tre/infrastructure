@@ -1,8 +1,3 @@
-variable "infrastructure_provider" {
-    type = string
-    description = "provider name"
-}
-
 variable "region" {
     type = string
     description = "infrastructure region"

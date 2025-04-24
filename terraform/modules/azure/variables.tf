@@ -1,6 +1,6 @@
-variable "infrastructure_provider" {
-    type = string
-    description = "provider name"
+variable "azure_subscription_id" {
+  description = "Azure subscription ID"
+  type        = string
 }
 
 variable "region" {
@@ -13,5 +13,3 @@ variable "cluster_name" {
     description = "Name of the cluster"
     default = "k8tre"
 }
-
-
