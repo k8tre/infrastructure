@@ -1,9 +1,9 @@
 locals {
   azure_config = {
-    subscription_id = "xyz"
+    abc = "xyz"
   }
 
   aws_config = {
-    xyz = "xyz",
+    abc = "xyz",
   }
 }

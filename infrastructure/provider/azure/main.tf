@@ -10,13 +10,13 @@ terraform {
 
 # Resource Group for AKS
 resource "azurerm_resource_group" "aks" {
-  name     = "k8tre-cluster-rg"
+  name     = format("%s-cluster-rg", var.cluster_name)
   location = "uksouth"
 }
 
 # Virtual Network
 resource "azurerm_virtual_network" "vnet" {
-  name                = "k8tre-vnet"
+  name                = format("%s-cluster-vnet", var.cluster_name)
   address_space       = ["10.0.0.0/8"]
   location            = azurerm_resource_group.aks.location
   resource_group_name = azurerm_resource_group.aks.name
@@ -24,7 +24,7 @@ resource "azurerm_virtual_network" "vnet" {
 
 # Subnet for AKS nodes
 resource "azurerm_subnet" "aks_subnet" {
-  name                 = "k8tre-aks-subnet"
+  name                 = format("%s-cluster-subnet", var.cluster_name)
   resource_group_name  = azurerm_resource_group.aks.name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = ["10.1.0.0/16"]
@@ -32,16 +32,15 @@ resource "azurerm_subnet" "aks_subnet" {
 
 # Identity for AKS
 resource "azurerm_user_assigned_identity" "aks_identity" {
-  name                = "k8tre-aks-identity"
+  name                = format("%s-managed-identity", var.cluster_name)
   resource_group_name = azurerm_resource_group.aks.name
   location            = azurerm_resource_group.aks.location
 }
 
 # AKS prd cluster Verified Module
 module "aks_production" {
-  source = "../avm-ptn-aks-production"
-
-  name                = "k8tre-aks-cluster"
+  source              = "./avm-patterns/avm-ptn-aks-production"
+  name                = format("%s-aks-cluster", var.cluster_name)
   location            = azurerm_resource_group.aks.location
   resource_group_name = azurerm_resource_group.aks.name
 
