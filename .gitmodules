@@ -1,3 +1,0 @@
-[submodule "infrastructure/provider/azure/avm-patterns/avm-ptn-aks-production"]
-	path = infrastructure/provider/azure/avm-patterns/avm-ptn-aks-production
-	url = https://github.com/Azure/terraform-azurerm-avm-ptn-aks-production.git
