@@ -39,7 +39,7 @@ provider "azurerm" {
 
 module "azure_infrastructure" {
   count        = var.infrastructure_provider == "azure" ? 1 : 0
-  source       = "./provider/azure"
+  source       = "./provider/azure/azure"
   region       = var.region
   cluster_name = var.cluster_name
   providers = {
