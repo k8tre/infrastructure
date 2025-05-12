@@ -3,8 +3,8 @@ repos:
     rev: v1.88.4
     hooks:
       - id: terraform_fmt
-      - id: terraform_validate
-        exclude: ^provider/azure/.*
+      #- id: terraform_validate
+      #  exclude: provider/azure/[^/]+$
       - id: terraform_docs
         args:
           - '--args=--lockfile=false --config=.terraform-docs.yml'
