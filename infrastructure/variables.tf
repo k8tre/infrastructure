@@ -15,16 +15,50 @@ variable "cluster_name" {
 }
 
 # Conditional Az vars
-variable "azure_subscription_id" {
+variable "azure_k8tre_mgmt_cluster_subscription_id" {
   type        = string
   description = "Azure subscription ID"
   default     = null
 
   validation {
-    condition     = var.infrastructure_provider != "azure" || var.azure_subscription_id != null
-    error_message = "azure_subscription_id must be set when infrastructure_provider is 'azure'."
+    condition     = var.infrastructure_provider != "azure" || var.azure_k8tre_mgmt_cluster_subscription_id != null
+    error_message = "azure_k8tre_mgmt_cluster_subscription_id must be set when infrastructure_provider is 'azure'."
   }
 }
+
+variable "azure_k8tre_dev_cluster_subscription_id" {
+  type        = string
+  description = "Azure subscription ID"
+  default     = null
+
+  validation {
+    condition     = var.infrastructure_provider != "azure" || var.azure_k8tre_dev_cluster_subscription_id != null
+    error_message = "azure_k8tre_dev_cluster_subscription_id must be set when infrastructure_provider is 'azure'."
+  }
+}
+
+variable "azure_k8tre_stg_cluster_subscription_id" {
+  type        = string
+  description = "Azure subscription ID"
+  default     = null
+
+  validation {
+    condition     = var.infrastructure_provider != "azure" || var.azure_k8tre_stg_cluster_subscription_id != null
+    error_message = "azure_k8tre_dev_cluster_subscription_id must be set when infrastructure_provider is 'azure'."
+  }
+}
+
+variable "azure_k8tre_connectivity_cluster_subscription_id" {
+  type        = string
+  description = "Azure subscription ID"
+  default     = null
+
+  validation {
+    condition     = var.infrastructure_provider != "azure" || var.azure_k8tre_connectivity_cluster_subscription_id != null
+    error_message = "azure_k8tre_connectivity_cluster_subscription_id must be set when infrastructure_provider is 'azure'."
+  }
+}
+
 
 variable "azure_tenant_id" {
   type        = string

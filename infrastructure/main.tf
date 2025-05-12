@@ -1,6 +1,6 @@
 terraform {
 
-  required_version = ">= 1.7.0"
+  required_version = ">= 1.11.0"
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
@@ -10,17 +10,31 @@ terraform {
 }
 
 provider "azurerm" {
-  alias           = "azure"
-  subscription_id = var.azure_subscription_id
+  alias           = "azure-k8sman"
+  subscription_id = var.azure_k8tre_mgmt_cluster_subscription_id
   #tenant_id       = var.azure_tenant_id
   features {}
 }
 
-module "aws_infrastructure" {
-  count        = var.infrastructure_provider == "aws" ? 1 : 0
-  source       = "./provider/aws"
-  region       = var.region
-  cluster_name = var.cluster_name
+provider "azurerm" {
+  alias           = "azure-dev"
+  subscription_id = var.azure_k8tre_dev_cluster_subscription_id
+  #tenant_id       = var.azure_tenant_id
+  features {}
+}
+
+provider "azurerm" {
+  alias           = "azure-staging"
+  subscription_id = var.azure_k8tre_stg_cluster_subscription_id
+  #tenant_id       = var.azure_tenant_id
+  features {}
+}
+
+provider "azurerm" {
+  alias           = "azure-connectivity"
+  subscription_id = var.azure_k8tre_connectivity_cluster_subscription_id
+  #tenant_id       = var.azure_tenant_id
+  features {}
 }
 
 module "azure_infrastructure" {
@@ -29,8 +43,18 @@ module "azure_infrastructure" {
   region       = var.region
   cluster_name = var.cluster_name
   providers = {
-    azurerm = azurerm.azure
+    azurerm.azure-k8sman       = azurerm.azure-k8sman
+    azurerm.azure-dev          = azurerm.azure-dev
+    azurerm.azure-connectivity = azurerm.azure-connectivity
+    azurerm.azure-staging      = azurerm.azure-staging
   }
+}
+
+module "aws_infrastructure" {
+  count        = var.infrastructure_provider == "aws" ? 1 : 0
+  source       = "./provider/aws"
+  region       = var.region
+  cluster_name = var.cluster_name
 }
 
 module "on_prem_infrastructure" {
