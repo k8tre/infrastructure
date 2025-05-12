@@ -4,10 +4,11 @@ repos:
     hooks:
       - id: terraform_fmt
       - id: terraform_validate
+        exclude: provider/azure/[^/]+$
       - id: terraform_docs
         args:
           - '--args=--lockfile=false --config=.terraform-docs.yml'
-        files:  ./terraform/
+        files:  ./infrastructure/
       - id: terraform_tflint
         args:
           - '--args=--only=terraform_deprecated_interpolation'
