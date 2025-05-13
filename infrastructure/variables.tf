@@ -59,6 +59,17 @@ variable "azure_k8tre_connectivity_cluster_subscription_id" {
   }
 }
 
+variable "azure_k8tre_mgmt_subscription_id" {
+  type        = string
+  description = "Azure subscription ID"
+  default     = null
+
+  validation {
+    condition     = var.infrastructure_provider != "azure" || var.azure_k8tre_mgmt_subscription_id != null
+    error_message = "azure_k8tre_mgmt_subscription_id must be set when infrastructure_provider is 'azure'."
+  }
+}
+
 
 variable "azure_tenant_id" {
   type        = string

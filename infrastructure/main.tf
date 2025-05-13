@@ -37,9 +37,16 @@ provider "azurerm" {
   features {}
 }
 
+provider "azurerm" {
+  alias           = "azure-management"
+  subscription_id = var.azure_k8tre_mgmt_subscription_id
+  #tenant_id       = var.azure_tenant_id
+  features {}
+}
+
 module "azure_infrastructure" {
   count        = var.infrastructure_provider == "azure" ? 1 : 0
-  source       = "./provider/azure/azure"
+  source       = "./provider/azure"
   region       = var.region
   cluster_name = var.cluster_name
   providers = {
@@ -47,6 +54,7 @@ module "azure_infrastructure" {
     azurerm.azure-dev          = azurerm.azure-dev
     azurerm.azure-connectivity = azurerm.azure-connectivity
     azurerm.azure-staging      = azurerm.azure-staging
+    azurerm.azure-management   = azurerm.azure-management
   }
 }
 

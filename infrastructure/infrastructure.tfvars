@@ -6,3 +6,4 @@ azure_k8tre_dev_cluster_subscription_id          = "02b2c397-edb6-476f-b3a4-aa63
 azure_tenant_id                                  = "30a82846-a29e-4b6b-af27-9b19418ee1b3"
 azure_k8tre_connectivity_cluster_subscription_id = "443fc06f-050e-4794-83d8-eaeee691d453"
 azure_k8tre_stg_cluster_subscription_id          = "4e83168f-6204-4255-b1c0-9042c6fe5afd"
+azure_k8tre_mgmt_subscription_id                 = "db3e5dae-c030-44df-8205-c512d0195e0e"
