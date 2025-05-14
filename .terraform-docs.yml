@@ -7,7 +7,7 @@ version: "~> 0.18"
 
 recursive:
   enabled: true
-  path: modules
+  path: infrastructure/provider
 
 sections:
   hide: []
